@@ -8,6 +8,7 @@ var app = require('../');
 var debug = require('debug')('rszr:bin');
 var http = require('http');
 var worker = require('../lib/worker');
+var socket = require('../lib/socket');
 
 /**
  * Get port from environment and store in Express.
@@ -36,6 +37,11 @@ server.on('listening', onListening);
 
 worker.start(onWorking);
 
+/**
+ * Start socket.
+ */
+
+socket(server).start(onSocketListening);
 
 /**
  * Normalize a port into a number, string, or false.
@@ -103,4 +109,12 @@ function onListening() {
 
 function onWorking() {
   debug('Worker: working');
+}
+
+/**
+ * Wvent listener for socket.
+ */
+ 
+function onSocketListening() {
+  debug('Socket: listening');
 }

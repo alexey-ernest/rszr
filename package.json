@@ -33,6 +33,7 @@
     "morgan": "^1.7.0",
     "multiparty": "^4.1.2",
     "node-uuid": "^1.4.7",
-    "nsqjs": "^0.7.12"
+    "nsqjs": "^0.7.12",
+    "socket.io": "^1.4.8"
   }
 }

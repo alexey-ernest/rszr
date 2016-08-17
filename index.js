@@ -16,9 +16,14 @@ if (app.get('env') === 'development') {
   app.use(logger());
 }
 
+// body parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// static
+app.use('/', express.static(path.join(__dirname, 'public')));
+
+// routes
 app.use('/', routes);
 
 // error handlers

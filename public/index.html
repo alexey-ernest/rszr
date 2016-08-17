@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>RSZR</title>
+  </head>
+  <body>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+      socket.on('process', function (data) {
+        console.log(data);
+      });
+    </script>
+  </body>
+</html>
