@@ -13,7 +13,7 @@ if (!process.env.S3_REGION) {
 }
 
 var bucket = process.env.S3_BUCKET;
-var s3Region = process.env.S3_REGION ;
+var s3Region = process.env.S3_REGION;
 
 var debug = require('debug')('rszr:api:image-upload');
 var uuid = require('node-uuid');

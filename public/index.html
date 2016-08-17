@@ -42,7 +42,7 @@
 
           // get scaled image data
           var canvasData = canvas.toDataURL('image/' + data.type, 1.0);
-          var base64 = canvasData.replace('data:image\/[^;]+;base64,', '');
+          var base64 = canvasData.replace(/data:image\/[^;]+;base64,/, '');
 
           // send scaled image data back to the server
           socket.emit('complete', base64);
