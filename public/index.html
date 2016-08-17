@@ -38,7 +38,7 @@
           canvas.setAttribute('height', data.height);
 
           // draw image
-          ctx.drawImage(img, (width - data.width)/2, (height - data.height)/2, width, height);
+          ctx.drawImage(img, (data.width - width)/2, (data.height - height)/2, width, height);
 
           // get scaled image data
           var canvasData = canvas.toDataURL('image/' + data.type, 1.0);
