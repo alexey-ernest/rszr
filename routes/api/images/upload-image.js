@@ -21,8 +21,7 @@ var path = require('path');
 var multiparty = require('multiparty');
 var AWS = require('aws-sdk');
 var s3 = new AWS.S3({region: s3Region});
-var Bus = require('../../../lib/bus');
-var bus = new Bus();
+var bus = require('../../../lib/bus');
 var utils = require('../../../lib/utils');
 
 /**
