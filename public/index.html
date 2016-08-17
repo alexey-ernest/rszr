@@ -14,8 +14,6 @@
 
       var socket = io();
       socket.on('process', function (data) {
-        console.log(data);
-
         var scaleX,
             scaleY,
             scale,
@@ -31,7 +29,7 @@
           scale = Math.max(scaleX, scaleY);
 
           width = img.width * scale;
-          height = img.width * scale;
+          height = img.height * scale;
 
           // scale canvas
           canvas.setAttribute('width', data.width);
