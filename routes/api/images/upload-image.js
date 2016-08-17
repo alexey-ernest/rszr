@@ -7,14 +7,20 @@ if (!process.env.S3_BUCKET) {
   console.log("S3_BUCKET environment variable required.");
   process.exit(1);
 }
+if (!process.env.S3_REGION) {
+  console.log("S3_REGION environment variable required.");
+  process.exit(1);
+}
+
 var bucket = process.env.S3_BUCKET;
+var s3Region = process.env.S3_REGION ;
 
 var debug = require('debug')('rszr:api:image-upload');
 var uuid = require('node-uuid');
 var path = require('path');
 var multiparty = require('multiparty');
 var AWS = require('aws-sdk');
-var s3 = new AWS.S3();
+var s3 = new AWS.S3({region: s3Region});
 var Bus = require('../../../lib/bus');
 var bus = new Bus();
 var utils = require('../../../lib/utils');
