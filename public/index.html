@@ -5,12 +5,21 @@
     <title>RSZR</title>
   </head>
   <body>
+    <canvas id="canvas" style="width: 500px; height: 500px;">
+    </canvas>
     <script src="/socket.io/socket.io.js"></script>
     <script>
+      var ctx = document.getElementById('canvas').getContext('2d');
+
       var socket = io();
       socket.on('process', function (data) {
         console.log(data);
+        
+        var img = new Image();
+        img.src = 'data:image/' + data.type + ';base64,' + data.content;
+        ctx.drawImage(img, 0, 0);
       });
     </script>
+    
   </body>
 </html>
