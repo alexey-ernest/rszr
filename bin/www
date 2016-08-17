@@ -5,8 +5,9 @@
  */
 
 var app = require('../');
-var debug = require('debug')('rszr:http');
+var debug = require('debug')('rszr:bin');
 var http = require('http');
+var worker = require('../lib/worker');
 
 /**
  * Get port from environment and store in Express.
@@ -28,6 +29,13 @@ var server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
+/**
+ * Start worker.
+ */
+
+worker.start(onWorking);
+
 
 /**
  * Normalize a port into a number, string, or false.
@@ -86,5 +94,13 @@ function onListening() {
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+  debug('HTTP: listening on ' + bind);
+}
+
+/**
+ * Event listener for worker.
+ */
+
+function onWorking() {
+  debug('Worker: working');
 }

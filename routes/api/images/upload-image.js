@@ -79,7 +79,7 @@ module.exports = function (req, res, next) {
         id: id,
         uri: uri
       };
-      bus.imageUploaded(event, function (err) {
+      bus.emitImageUploaded(event, function (err) {
         if (err) return next(err);
 
         res.json(event);
