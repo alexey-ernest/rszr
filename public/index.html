@@ -5,19 +5,50 @@
     <title>RSZR</title>
   </head>
   <body>
-    <canvas id="canvas" style="width: 500px; height: 500px;">
+    <canvas id="canvas" style="border: 1px solid #333;">
     </canvas>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-      var ctx = document.getElementById('canvas').getContext('2d');
+      var canvas = document.getElementById('canvas');
+      var ctx = canvas.getContext('2d');
 
       var socket = io();
       socket.on('process', function (data) {
         console.log(data);
-        
+
+        var scaleX,
+            scaleY,
+            scale,
+            width,
+            height;
+
+        // load image data
         var img = new Image();
+        img.onload = function() {
+          // calculate scale parameters
+          scaleX = data.width / img.width;
+          scaleY = data.height / img.height;
+          scale = Math.max(scaleX, scaleY);
+
+          width = img.width * scale;
+          height = img.width * scale;
+
+          // scale canvas
+          canvas.setAttribute('width', data.width);
+          canvas.setAttribute('height', data.height);
+
+          // draw image
+          ctx.drawImage(img, (width - data.width)/2, (height - data.height)/2, width, height);
+
+          // get scaled image data
+          var canvasData = canvas.toDataURL('image/' + data.type, 1.0);
+          var base64 = canvasData.replace('data:image\/[^;]+;base64,', '');
+
+          // send scaled image data back to the server
+          socket.emit('complete', base64);
+        };
+
         img.src = 'data:image/' + data.type + ';base64,' + data.content;
-        ctx.drawImage(img, 0, 0);
       });
     </script>
     
