@@ -6,7 +6,7 @@ var express = require('express');
 var router = express.Router();
 
 // mounting image API
-var imageApi = require('./image');
-router.use('/image', imageApi);
+var imageApi = require('./images');
+router.use('/images', imageApi);
 
 module.exports = router;
