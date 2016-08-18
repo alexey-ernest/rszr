@@ -90,10 +90,12 @@
       var canvasData = canvas.toDataURL('image/' + type, 1.0);
       var base64 = canvasData.replace(/data:image\/[^;]+;base64,/, '');
 
+      fn(base64);
+
       // simulate work
-      setTimeout(function () {
-        fn(base64);
-      }, Math.random() * 4000);
+      // setTimeout(function () {
+      //   fn(base64);
+      // }, Math.random() * 4000);
     };
 
     img.src = 'data:image/' + type + ';base64,' + base64;
