@@ -90,7 +90,10 @@
       var canvasData = canvas.toDataURL('image/' + type, 1.0);
       var base64 = canvasData.replace(/data:image\/[^;]+;base64,/, '');
 
-      fn(base64);
+      // simulate work
+      setTimeout(function () {
+        fn(base64);
+      }, Math.random() * 4000);
     };
 
     img.src = 'data:image/' + type + ';base64,' + base64;
@@ -111,7 +114,7 @@
     // start listening for incoming messages
     socket.on('process', function (data) {
       console.log(data);
-      
+
       processImage(data.content, data.type, data.width, data.height, function (base64) {
         // send processed data back to the server
         socket.emit('complete', base64);
