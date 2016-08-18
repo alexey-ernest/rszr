@@ -101,6 +101,24 @@
     img.src = 'data:image/' + type + ';base64,' + base64;
   }
 
+  function logToTheScreen(uri) {
+    var text = document.createTextNode(uri);
+
+    var link = document.createElement('a');
+    link.href = uri;
+    link.setAttribute('target', '_blank');
+    link.appendChild(text);
+    
+    var p = document.createElement('p');
+    p.appendChild(link);
+
+    if (!logToTheScreen.body) {
+      logToTheScreen.body = document.getElementsByTagName("body")[0];
+    }
+
+    logToTheScreen.body.appendChild(p);
+  }
+
   /**
    * Inits RSZR app.
    */
@@ -120,6 +138,9 @@
       processImage(data.content, data.type, data.width, data.height, function (base64) {
         // send processed data back to the server
         socket.emit('complete', base64);
+        
+        // log to the screen
+        logToTheScreen(data.targetUri);
       });
     });
   }
