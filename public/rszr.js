@@ -110,6 +110,8 @@
 
     // start listening for incoming messages
     socket.on('process', function (data) {
+      console.log(data);
+      
       processImage(data.content, data.type, data.width, data.height, function (base64) {
         // send processed data back to the server
         socket.emit('complete', base64);
