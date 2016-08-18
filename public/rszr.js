@@ -105,7 +105,7 @@
     socket = io();
 
     // prepare canvas for image processing
-    canvas = document.getElementById('canvas');
+    canvas = document.createElement('canvas');
     canvasCtx = canvas.getContext('2d');
 
     // start listening for incoming messages
